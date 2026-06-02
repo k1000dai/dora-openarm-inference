@@ -28,8 +28,8 @@ in another terminal, run the dataflow
 uv venv .venv -p 3.12
 uv pip install dora-rs-cli
 source .venv/bin/activate
-dora build dataflow-inference.yaml --uv
-SOCKET=/dev/shm/policy-server.socket dora run dataflow-inference.yaml --uv
+dora build dataflow-local-inference.yaml --uv
+SOCKET=/dev/shm/policy-server.socket dora run dataflow-local-inference.yaml --uv
 ```
 
 
