@@ -4,19 +4,49 @@ This repository provides inference configurations for [OpenArm](https://openarm.
 
 ## Configurations
 
-TODO
-
 ### Real configuration
 
-TODO
+Real Robot Example will be added in the near future. Stay tuned!
 
 ### Simulation configuration
 
-TODO
+#### Local Inference
 
-### Dummy configuration
+set up the local policy server:
 
-TODO
+```bash
+uv venv .venv_server
+source .venv_server/bin/activate
+uv pip install lerobot==0.3.3 pyarrow
+# uv pip install torch torchvision torchaudio --torch-backend=cu128 --upgrade  # for CUDA 12.8
+python src/local_policy_server.py /dev/shm/policy-server.socket
+```
+
+in another terminal, run the dataflow 
+
+```bash
+uv venv .venv -p 3.12
+uv pip install dora-rs-cli
+source .venv/bin/activate
+dora build dataflow-inference.yaml --uv
+SOCKET=/dev/shm/policy-server.socket dora run dataflow-inference.yaml --uv
+```
+
+
+#### Docker Inference
+
+Build the Docker image:
+
+```bash
+docker build -t openarm-inference-image-lerobot:latest .
+```
+
+Run the dataflow.
+
+```bash
+dora build dataflow-docker-inference.yaml --uv
+dora run dataflow-docker-inference.yaml --uv
+```
 
 ## License
 
