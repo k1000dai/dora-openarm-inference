@@ -30,12 +30,12 @@ ENV VIRTUAL_ENV=/project/.venv \
     PATH="/project/.venv/bin:$PATH"
 
 RUN python -c "\
-    from lerobot.policies.pretrained import PreTrainedConfig; \
-    from lerobot.policies.factory import get_policy_class; \
-    cfg = PreTrainedConfig.from_pretrained('enactic/act-openarm-2-cell-pick_up_cube_mujoco'); \
-    cfg.pretrained_path = 'enactic/act-openarm-2-cell-pick_up_cube_mujoco'; \
-    get_policy_class(cfg.type).from_pretrained(config=cfg, pretrained_name_or_path=cfg.pretrained_path)" \
-    && python -c "import torchvision; torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)"
+from lerobot.policies.pretrained import PreTrainedConfig; \
+from lerobot.policies.factory import get_policy_class; \
+cfg = PreTrainedConfig.from_pretrained('enactic/act-openarm-2-cell-pick_up_cube_mujoco'); \
+cfg.pretrained_path = 'enactic/act-openarm-2-cell-pick_up_cube_mujoco'; \
+get_policy_class(cfg.type).from_pretrained(config=cfg, pretrained_name_or_path=cfg.pretrained_path)" \
+&& python -c "import torchvision; torchvision.models.resnet18(weights=torchvision.models.ResNet18_Weights.DEFAULT)"
 
 ENV HF_HUB_OFFLINE=1
 
