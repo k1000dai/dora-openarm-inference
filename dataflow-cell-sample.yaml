@@ -187,6 +187,7 @@ nodes:
       - observation
 
   - id: quittable-observer
+    build: pip install -e nodes/dora-openarm-quitter
     path: dora-openarm-quitter
     inputs:
       command:     evaluation-ui/arm_command
